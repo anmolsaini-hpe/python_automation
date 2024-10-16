@@ -8,14 +8,15 @@ def hit_endpoint(url):
     if(url!="null"):
         data = requests.get(url)
         #print(data.json())
+        # print(data)
         dump = data.json()
-        print(dump["count"])
-        for link in dump["entries"]:
-            print(link['Link'])
+        # print(dump)
+        for type in dump["people"]:
+            print(type['craft'])
             try:
-                data2 = requests.get(link['Link'],timeout=10)
+                data2 = requests.get(type['craft'],timeout=10)
                 if (data2.status_code==200):
-                    list.append(link['Link'])
+                    list.append(type['craft'])
                     print(list)
                 else:
                     print("Status Code is not 200")
@@ -25,4 +26,5 @@ def hit_endpoint(url):
     else:
         print("Error loading the url")
 
-hit_endpoint("https://api.publicapis.org/entries")
+hit_endpoint("http://api.open-notify.org/astros.json")
+# hit_endpoint("https://www.google.com")
